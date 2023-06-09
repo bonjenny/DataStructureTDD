@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyHashSet.cs" />
+    <Compile Include="MyStack.cs" />
+    <Compile Include="MyQueue.cs" />
     <Compile Include="MyList.cs" />
     <Compile Include="MyArrayList.cs" />
     <Compile Include="MyLinkedList.cs" />
