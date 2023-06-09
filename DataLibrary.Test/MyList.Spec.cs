@@ -317,6 +317,77 @@ namespace Tests
                 Console.WriteLine(item);  //=> Car 객체 내부의 값이 문자열로 출력될 수 있도록 Car객체의 ToString() 메소드를 재정의해야 함.
             }
         }
+
+        [Test]
+        public void ContainsTest4()
+        {
+            var x = new MyList<string>(new StringIgnoreCaseComparer());
+            x.Add("Samsung");
+            x.Add("Hyundae");
+            x.Add("LG");
+
+            Assert.IsTrue(x.Contains<string>(item => item.StartsWith("S")));
+            Assert.IsFalse(x.Contains<string>(item => item.StartsWith("A")));
+        }
+
+        [Test]
+        public void FindTest1()
+        {
+            var x = new MyList<string>(new StringIgnoreCaseComparer());
+            x.Add("Samsung");
+            x.Add("Hyundae");
+            x.Add("LG");
+
+            Assert.AreEqual(x.Find<string>(item => item.StartsWith("S")), "Samsung");
+            Assert.AreEqual(x.Find<string>(item => item.StartsWith("A")), null);
+
+            Assert.AreEqual(x.FindIndex<string>(item => item.StartsWith("S")), 0);
+            Assert.AreEqual(x.FindIndex<string>(1, item => item.StartsWith("S")), -1);
+        }
+
+        [Test]
+        public void FindLastTest1()
+        {
+            var x = new MyList<string>(new StringIgnoreCaseComparer());
+            x.Add("Samsung");
+            x.Add("Hyundae");
+            x.Add("LG");
+
+            Assert.AreEqual(x.FindLast<string>(item => item.StartsWith("S")), "Samsung");
+            Assert.AreEqual(x.FindLast<string>(item => item.StartsWith("A")), null);
+
+            Assert.AreEqual(x.FindLastIndex<string>(item => item.StartsWith("S")), 0);
+            Assert.AreEqual(x.FindLastIndex<string>(1, item => item.StartsWith("L")), -1);
+        }
+
+        [Test]
+        public void RemoveTest2()
+        {
+            var x = new MyList<string>(new StringIgnoreCaseComparer()) {
+                "Samsung",
+                "Hyundae",
+                "LG"
+            };
+
+            Assert.IsTrue(x.Remove<string>(item => item.StartsWith("S")));
+            foreach (var item in x) {
+                Console.WriteLine(item);
+            }
+
+            Assert.IsFalse(x.Remove<string>(item => item.StartsWith("A")));
+            foreach (var item in x) {
+                Console.WriteLine(item);
+            }
+
+            x = new MyList<string>(new StringIgnoreCaseComparer()) {
+                "Samsung",
+                "Hyundae",
+                "LG"
+            };
+
+            Assert.AreEqual(x.RemoveAll<string>(item => item.Contains("a")), 2);
+            Assert.AreEqual(x[0], "LG");
+        }
     }
 
     public class StringIgnoreCaseComparer : IEqualityComparer<string>

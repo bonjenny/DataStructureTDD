@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="MyList.cs" />
     <Compile Include="MyArrayList.cs" />
+    <Compile Include="MyLinkedList.cs" />
+    <Compile Include="MySLinkedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MyList.Ext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

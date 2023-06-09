@@ -14,7 +14,7 @@ namespace DataStructure
         private T[] _array;   // 할당된 배열을 가리키는 참조변수
         private int _size;         // 현재 저장된 원소 개수
 
-        // 생성자
+        #region [생성자]
         public MyList(IEqualityComparer<T> equalityComparer = null)
             : this(4, equalityComparer) // 아래 생성자 대리호출
         {
@@ -27,7 +27,9 @@ namespace DataStructure
             this._comparer = equalityComparer ?? EqualityComparer<T>.Default;
             //this._comparer = equalityComparer != null ? equalityComparer : EqualityComparer<T>.Default;
         }
+        #endregion
 
+        #region [Count, Capacity, EnsureCapacity]
         public int Count
         {
             get { return _size; } // 읽기전용
@@ -51,6 +53,16 @@ namespace DataStructure
             }
         }
 
+        private void EnsureCapacity()
+        {
+            int capacity = _array.Length;
+            if (_size >= capacity) {
+                this.Capacity = (capacity == 0 ? 4 : capacity * 2);
+            }
+        }
+        #endregion
+
+        #region [Index]
         // 외부에서 배열 요소에 접근을 위한 인덱서 프로퍼티
         public T this[int index]
         {
@@ -65,15 +77,9 @@ namespace DataStructure
                 _array[index] = value;
             }
         }
+        #endregion
 
-        private void EnsureCapacity()
-        {
-            int capacity = _array.Length;
-            if (_size >= capacity) {
-                this.Capacity = (capacity == 0 ? 4 : capacity * 2);
-            }
-        }
-
+        #region [Add, Insert]
         // 배열의 마지막에 원소 추가
         public void Add(T element)
         {
@@ -100,7 +106,9 @@ namespace DataStructure
             _array[index] = element;
             _size++;
         }
+        #endregion
 
+        #region [RemoveAt, RemoveRange, Clear, Remove]
         // 해당 위치의 원소 삭제
         public void RemoveAt(int index)
         {
@@ -128,6 +136,18 @@ namespace DataStructure
             if (_size != 0) _size = 0; // 1. size를 0으로 만들기
         }
 
+        public bool Remove(T item)
+        {
+            var index = IndexOf(item);
+            if (index >= 0) {
+                RemoveAt(index);
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region [CopyTo]
         public void CopyTo(Array array)
         {
             CopyTo(array, 0);
@@ -139,7 +159,9 @@ namespace DataStructure
             if (arrayIndex > _size) throw new IndexOutOfRangeException();
             Array.Copy(array, arrayIndex, _array, 0, array.Length);
         }
+        #endregion
 
+        #region [Swap, ToArray, Contains]
         public void Swap(int i, int j)
         {
             if (i < 0 || i >= _size) throw new IndexOutOfRangeException();
@@ -156,7 +178,7 @@ namespace DataStructure
             Array.Copy(_array, 0, array, 0, _size);
             return array;
         }
-
+        
         public bool Contains(T item)
         {
             for (int index = 0; index < this._size; index++) {
@@ -167,7 +189,9 @@ namespace DataStructure
             }
             return false;
         }
+        #endregion
 
+        #region [IndexOf, LastIndexOf]
         public int IndexOf(T item)
         {
             return IndexOf(item, 0, _size);
@@ -206,24 +230,16 @@ namespace DataStructure
             int endIndex = startIndex - count + 1;
 
             if (startIndex < 0 || startIndex >= this._size) throw new IndexOutOfRangeException();
-            if (count < 0 || count < startIndex + 1) throw new IndexOutOfRangeException();
+            if (count < 0 || count > startIndex + 1) throw new IndexOutOfRangeException();
 
             for (int i = startIndex; i >= endIndex; i--) {
                 if (_comparer.Equals(_array[i], item)) return i;
             }
             return -1;
         }
+        #endregion
 
-        public bool Remove(T item)
-        {
-            var index = IndexOf(item);
-            if (index >= 0) {
-                RemoveAt(index);
-                return true;
-            }
-            return false;
-        }
-
+        #region [BinarySearch]
         public int BinarySearch(T item)
         {
             return BinarySearch(item, Comparer<T>.Default);
@@ -233,7 +249,9 @@ namespace DataStructure
         {
             return Array.BinarySearch<T>(_array, 0, _size, item, comparer);
         }
+        #endregion
 
+        #region [Sort]
         public void Sort()
         {
             Sort(Comparer<T>.Default);
@@ -243,6 +261,7 @@ namespace DataStructure
         {
             Array.Sort<T>(_array, 0, _size, comparer);
         }
+        #endregion
 
         #region [IEnumerable, IEnumerable<T> 구현]
         public IEnumerator<T> GetEnumerator()
