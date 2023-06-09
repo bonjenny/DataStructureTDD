@@ -3,10 +3,10 @@ D:\DataStructure\DataStructure\DataStructure\bin\Debug\DataStructure.pdb
 D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
 D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataStructure.dll
 D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataStructure.pdb
-D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataLibrary.csprojAssemblyReference.cache
 D:\DataStructure\DataStructure\bin\Debug\DataStructure.dll
 D:\DataStructure\DataStructure\bin\Debug\DataStructure.pdb
 D:\DataStructure\DataStructure\obj\Debug\DataLibrary.csprojAssemblyReference.cache
 D:\DataStructure\DataStructure\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
 D:\DataStructure\DataStructure\obj\Debug\DataStructure.dll
 D:\DataStructure\DataStructure\obj\Debug\DataStructure.pdb
+D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataLibrary.csprojAssemblyReference.cache
