@@ -27,9 +27,9 @@ namespace Tests
             Assert.IsFalse(x.Add(30));
             // => false. 이미 중복된 값이므로 추가되지 않는다.
 
-            //foreach (var item in x) {
-            //    Console.WriteLine(item);
-            //}
+            foreach (var item in x) {
+                Console.WriteLine(item);
+            }
 
             var xEnumerator = x.GetEnumerator();
             while (xEnumerator.MoveNext()) {

@@ -29,6 +29,7 @@ namespace DataStructure
 
     public class MyHashSet<T> : IEnumerable<T>
     {
+
         private MyLinkedList<T>[] _bucket;
         private IEqualityComparer<T> _equalityComparer;
         private int _count;
@@ -58,15 +59,9 @@ namespace DataStructure
             return this._bucket[index];
         }
 
-        private MyLinkedList<T> EnsureBucketList(MyLinkedList<T> bucket)
+        private void Resize()
         {
-            var newBucket = bucket ?? new MyLinkedList<T>();
-            return newBucket;
-        }
-
-        private void Resize(int capacity)
-        {
-            var newSize = HashHelpers.GetPrime(capacity);
+            var newSize = HashHelpers.GetPrime(_bucket.Length + HashHelpers.PRIME_FACTOR);
             var newBucket = new MyLinkedList<T>[newSize];
 
             for (int i = 0; i < _bucket.Length; i++) {
@@ -90,15 +85,14 @@ namespace DataStructure
 
         public bool Add(T item)
         {
-            if (_count >= _bucket.Length * HashHelpers.RESIZE_FACTOR)
-                Resize(_bucket.Length + HashHelpers.PRIME_FACTOR);
+            if (_count >= _bucket.Length * HashHelpers.RESIZE_FACTOR) Resize();
 
             int index = GetBucketIndex(item, _bucket.Length);
+            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<T>(_equalityComparer);
 
-            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<T>(_equalityComparer); 
             if (list.Contains(item)) return false;
-
             list.AddLast(item);
+
             this._count++;
             return true;
         }
