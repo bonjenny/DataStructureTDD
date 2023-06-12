@@ -9,4 +9,3 @@ D:\DataStructure\DataStructure\obj\Debug\DataLibrary.csprojAssemblyReference.cac
 D:\DataStructure\DataStructure\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
 D:\DataStructure\DataStructure\obj\Debug\DataStructure.dll
 D:\DataStructure\DataStructure\obj\Debug\DataStructure.pdb
-D:\DataStructure\DataStructure\DataStructure\obj\Debug\DataLibrary.csprojAssemblyReference.cache

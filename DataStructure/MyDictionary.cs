@@ -67,7 +67,7 @@ namespace DataStructure
                 foreach (var item in list)
                 {
                     int index = GetBucketIndex(item.Key, newSize);
-                    newBucket[index] = newBucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>(_equalityComparer);
+                    newBucket[index] = newBucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>();
                     newBucket[index].AddLast(item);
                 }
             }
@@ -85,9 +85,11 @@ namespace DataStructure
         public bool TryGetValue(TKey key, out TValue value)
         {
             var node = FindEntry(key);
-            if (node != null) return node.Data.Value;
-            value = node.Data.Value;
-            return true;
+
+            if (node != null) {
+                value = node.Data.Value;
+                return true;
+            }
 
             value = default(TValue);
             return false;
@@ -98,7 +100,7 @@ namespace DataStructure
             if (_count >= _bucket.Length * HashHelpers.RESIZE_FACTOR) Resize();
 
             int index = GetBucketIndex(key, _bucket.Length);
-            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>(_equalityComparer);
+            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>();
 
             var node = FindEntry(key);
             if (node != null) {
@@ -125,9 +127,11 @@ namespace DataStructure
         }
 
         // IEnumerable 구현 ===============================================
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()=> new MyDictionaryEnumerator(this);
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => new MyDictionaryEnumerator(this);
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
         IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => this.GetEnumerator();
 
+        // NESTED Helper Class =============================================
         private class MyDictionaryEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
         {
             private int _index;
