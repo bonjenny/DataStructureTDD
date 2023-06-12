@@ -200,7 +200,7 @@ namespace Tests
                 Console.WriteLine(x[i]);
             }
 
-            //IEnumerableÀ» ±¸ÇöÇÏÁö ¾ÊÀ¸¸é foreach¹® ¼öÇà ºÒ°¡´É
+            //IEnumerableï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ foreachï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
             foreach (var item in x) { 
                 Console.WriteLine(item);
             }
@@ -228,14 +228,14 @@ namespace Tests
         [Test]
         public void SortTest1()
         {
-            // Çü½Ä ºñ±³ÀÚ¸¦ »ç¿ëÇÏ´Â °æ¿ì¿Í ±×·¸Áö ¾Ê´Â °æ¿ìÀÇ »ç¿ë¿¹Á¦
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë¿¹ï¿½ï¿½
             var list = new MyList<Car>();
 
             list.Add(new Car(1992, "Ford"));
             list.Add(new Car(1999, "Buick"));
             list.Add(new Car(1997, "Honda"));
 
-            list.Sort();   //=> Sorted by Year (Ascending - IComparable »ç¿ë)
+            list.Sort();   //=> Sorted by Year (Ascending - IComparable ï¿½ï¿½ï¿½)
 
 
             var iterator = list.GetEnumerator();
@@ -252,21 +252,21 @@ namespace Tests
 
 
             foreach (var item in list) {
-                Console.WriteLine(item);  //=> Car °´Ã¼ ³»ºÎÀÇ °ªÀÌ ¹®ÀÚ¿­·Î Ãâ·ÂµÉ ¼ö ÀÖµµ·Ï Car°´Ã¼ÀÇ ToString() ¸Þ¼Òµå¸¦ ÀçÁ¤ÀÇÇØ¾ß ÇÔ.
+                Console.WriteLine(item);  //=> Car ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ Carï¿½ï¿½Ã¼ï¿½ï¿½ ToString() ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
             }
         }
 
         [Test]
         public void SortTest2()
         {
-            // Çü½Ä ºñ±³ÀÚ¸¦ »ç¿ëÇÏ´Â °æ¿ì¿Í ±×·¸Áö ¾Ê´Â °æ¿ìÀÇ »ç¿ë¿¹Á¦
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë¿¹ï¿½ï¿½
             var list = new MyList<Car>();
 
             list.Add(new Car(1992, "Ford"));
             list.Add(new Car(1999, "Buick"));
             list.Add(new Car(1997, "Honda"));
 
-            list.Sort(new YearDescendingComparer());   //=> Sorted by Year (Descending - IComparable »ç¿ë)
+            list.Sort(new YearDescendingComparer());   //=> Sorted by Year (Descending - IComparable ï¿½ï¿½ï¿½)
 
 
             var iterator = list.GetEnumerator();
@@ -284,7 +284,7 @@ namespace Tests
 
 
             foreach (var item in list) {
-                Console.WriteLine(item);  //=> Car °´Ã¼ ³»ºÎÀÇ °ªÀÌ ¹®ÀÚ¿­·Î Ãâ·ÂµÉ ¼ö ÀÖµµ·Ï Car°´Ã¼ÀÇ ToString() ¸Þ¼Òµå¸¦ ÀçÁ¤ÀÇÇØ¾ß ÇÔ.
+                Console.WriteLine(item);  //=> Car ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ Carï¿½ï¿½Ã¼ï¿½ï¿½ ToString() ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
             }
         }
 
@@ -296,10 +296,10 @@ namespace Tests
             x.Add("Hyundae");
             x.Add("LG");
 
-            x.Sort();   //=> Sorted (Descending - IComparable »ç¿ë)
+            x.Sort();   //=> Sorted (Descending - IComparable ï¿½ï¿½ï¿½)
             
             foreach (var item in x) {
-                Console.WriteLine(item);  //=> Car °´Ã¼ ³»ºÎÀÇ °ªÀÌ ¹®ÀÚ¿­·Î Ãâ·ÂµÉ ¼ö ÀÖµµ·Ï Car°´Ã¼ÀÇ ToString() ¸Þ¼Òµå¸¦ ÀçÁ¤ÀÇÇØ¾ß ÇÔ.
+                Console.WriteLine(item);  //=> Car ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ Carï¿½ï¿½Ã¼ï¿½ï¿½ ToString() ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
             }
         }
 
@@ -311,10 +311,10 @@ namespace Tests
             x.Add("Hyundae");
             x.Add("LG");
 
-            x.Sort(new StringDescendingComparer());   //=> Sorted (Ascending - IComparable »ç¿ë)
+            x.Sort(new StringDescendingComparer());   //=> Sorted (Ascending - IComparable ï¿½ï¿½ï¿½)
 
             foreach (var item in x) {
-                Console.WriteLine(item);  //=> Car °´Ã¼ ³»ºÎÀÇ °ªÀÌ ¹®ÀÚ¿­·Î Ãâ·ÂµÉ ¼ö ÀÖµµ·Ï Car°´Ã¼ÀÇ ToString() ¸Þ¼Òµå¸¦ ÀçÁ¤ÀÇÇØ¾ß ÇÔ.
+                Console.WriteLine(item);  //=> Car ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ Carï¿½ï¿½Ã¼ï¿½ï¿½ ToString() ï¿½Þ¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
             }
         }
 
@@ -392,13 +392,13 @@ namespace Tests
 
     public class StringIgnoreCaseComparer : IEqualityComparer<string>
     {
-        // »ý»ê³âµµ¿Í Á¦Á¶»ç°¡ ¸ðµÎ °°¾Æ¾ß °°Àº Â÷·Î ÀÎ½ÄÇÑ´Ù
+        // ï¿½ï¿½ï¿½ï¿½âµµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ç°¡ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ñ´ï¿½
         public bool Equals(string x, string y)
         {
             return string.Equals(x, y, StringComparison.OrdinalIgnoreCase);
         }
 
-        // »ý»ê³âµµ¿Í Á¦Á¶»ç °ª ¸ðµÎ¸¦ ÀÌ¿ëÇÏ¿© ÇØ½ÌÄÚµå¸¦ »ý¼ºÇÑ´Ù
+        // ï¿½ï¿½ï¿½ï¿½âµµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½Ø½ï¿½ï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
         public int GetHashCode(string obj)
         {
             return obj.GetHashCode() ^ obj.GetHashCode();

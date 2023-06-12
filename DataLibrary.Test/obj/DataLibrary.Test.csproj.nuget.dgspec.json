@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataLibrary.Test\\DataLibrary.Test.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataLibrary.Test\\DataLibrary.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataLibrary.Test\\DataLibrary.Test.csproj",
+        "projectName": "DataLibrary.Test",
+        "projectPath": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataLibrary.Test\\DataLibrary.Test.csproj",
+        "packagesPath": "C:\\Users\\bonje\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataLibrary.Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bonje\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataStructure\\DataLibrary.csproj": {
+                "projectPath": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataStructure\\DataLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[15.8.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[3.10.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataStructure\\DataLibrary.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataStructure\\DataLibrary.csproj",
+        "projectName": "DataLibrary",
+        "projectPath": "C:\\Users\\bonje\\source\\repos\\DataStructure\\DataStructure\\DataLibrary.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

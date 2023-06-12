@@ -17,7 +17,7 @@ namespace Tests
         [Test]
         public void AddTest1()
         {
-            // ÃÊ±â Å©±â¸¦ 3À¸·Î ½ÃÀÛÇØ¼­ Áß°£¿¡ ResizingÀÌ µÇµµ·Ï Å×½ºÆ® ÇÑ´Ù.
+            // ï¿½Ê±ï¿½ Å©ï¿½â¸¦ 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ Resizingï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ® ï¿½Ñ´ï¿½.
             var x = new MyHashSet<int>(3);
             Assert.IsTrue(x.Add(10));
             Assert.IsTrue(x.Add(2));
@@ -25,7 +25,7 @@ namespace Tests
             Assert.IsTrue(x.Add(4));
             Assert.IsTrue(x.Add(50));
             Assert.IsFalse(x.Add(30));
-            // => false. ÀÌ¹Ì Áßº¹µÈ °ªÀÌ¹Ç·Î Ãß°¡µÇÁö ¾Ê´Â´Ù.
+            // => false. ï¿½Ì¹ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 
             foreach (var item in x) {
                 Console.WriteLine(item);

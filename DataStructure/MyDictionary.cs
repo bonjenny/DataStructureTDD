@@ -33,7 +33,7 @@ namespace DataStructure
         // METHODS =======================================================
         internal int GetBucketIndex(TKey key, int bucketSize)
         {
-            var hash = _equalityComparer.GetHashCode(key) & 0x7fffffff;
+            int hash = _equalityComparer.GetHashCode(key) & 0x7fffffff;
             return hash % bucketSize;
         }
 
@@ -46,8 +46,32 @@ namespace DataStructure
         internal LinkedNode<KeyValuePair<TKey, TValue>> FindEntry(TKey key)
         {
             var list = FindBucketList(key);
+            return FindEntry(list, key);
+        }
+
+        internal LinkedNode<KeyValuePair<TKey, TValue>> FindEntry(MyLinkedList<KeyValuePair<TKey, TValue>> list, TKey key)
+        {
             if (list == null) return null;
             return list.Find((n) => _equalityComparer.Equals(n.Data.Key, key));
+        }
+
+        private void Resize()
+        {
+            var newSize = HashHelpers.GetPrime(_bucket.Length + HashHelpers.PRIME_FACTOR);
+            var newBucket = new MyLinkedList<KeyValuePair<TKey, TValue>>[newSize];
+
+            for (int i = 0; i < _bucket.Length; i++)
+            {
+                var list = _bucket[i];
+                if (list == null) continue;
+                foreach (var item in list)
+                {
+                    int index = GetBucketIndex(item.Key, newSize);
+                    newBucket[index] = newBucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>(_equalityComparer);
+                    newBucket[index].AddLast(item);
+                }
+            }
+            this._bucket = newBucket;
         }
 
         internal TValue GetValue(TKey key, bool raiseError)
@@ -58,21 +82,15 @@ namespace DataStructure
             throw new ArgumentException("The key doesn't exist in the Dictionary.", key.ToString());
         }
 
-        private void Resize()
+        public bool TryGetValue(TKey key, out TValue value)
         {
-            var newSize = HashHelpers.GetPrime(_bucket.Length + HashHelpers.PRIME_FACTOR);
-            var newBucket = new MyLinkedList<KeyValuePair<TKey, TValue>>[newSize];
+            var node = FindEntry(key);
+            if (node != null) return node.Data.Value;
+            value = node.Data.Value;
+            return true;
 
-            for (int i = 0; i < _bucket.Length; i++) {
-                var list = _bucket[i];
-                if (list == null) continue;
-                foreach (var item in list) {
-                    int index = GetBucketIndex(item.Key, newSize);
-                    newBucket[index] = newBucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>(_equalityComparer);
-                    newBucket[index].AddLast(item);
-                }
-            }
-            this._bucket = newBucket;
+            value = default(TValue);
+            return false;
         }
 
         internal bool SetValue(TKey key, TValue value, bool raiseError)
@@ -80,73 +98,50 @@ namespace DataStructure
             if (_count >= _bucket.Length * HashHelpers.RESIZE_FACTOR) Resize();
 
             int index = GetBucketIndex(key, _bucket.Length);
-            var list = _bucket[index];
+            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<KeyValuePair<TKey, TValue>>(_equalityComparer);
 
-            if (list == null) {
-                // TODO: 해당 버킷에 이미 만들어진 연결리스트가 없다면 새로 만들고 버킷에 할당한다.
-            }
-            else {
-                var node = // TODO: EqualityComparer를 이용하여 list에 key와 같은 중복된 항목이 있는지 찾는다.
-            if (node != null) { // 중복된 값이 있는 경우
-                    if (raiseError) {
-                        throw new ArgumentException("An element with the same key already exists in the Dictionary.", key.ToString());
-                    }
-
-                    // 기존에 저장되어 있던 값을 새로 설정되는 값으로 변경한다.
-                    node.Data = new KeyValuePair<TKey, TValue>(key, value);
-                    return false;
-                }
+            var node = FindEntry(key);
+            if (node != null) {
+                if (raiseError) throw new ArgumentException("An element with the same key already exists in the Dictionary.", key.ToString());
+                node.Data = new KeyValuePair<TKey, TValue>(key, value);
+                return false;
             }
 
-            // TODO: 연결리스트의 마지막에 해당 항목을 추가하고 카운트값을 하나 늘린다.
-
-            return true;
-        }
-
-        public bool Add(T item)
-        {
-            if (_count >= _bucket.Length * HashHelpers.RESIZE_FACTOR) Resize();
-
-            int index = GetBucketIndex(item, _bucket.Length);
-            var list = _bucket[index] = _bucket[index] ?? new MyLinkedList<T>(_equalityComparer);
-
-            if (list.Contains(item)) return false;
-            list.AddLast(item);
-
+            list.AddLast(new KeyValuePair<TKey, TValue>(key, value));
             this._count++;
             return true;
         }
+        public bool Add(TKey key, TValue value) => SetValue(key, value, false);
 
-        public void Remove(T item)
+        public bool Remove(TKey key)
         {
-            MyLinkedList<T> list = FindBucketList(item);
-            if (list == null) return;
-
-            var nodeToBeRemoved = list.Find(item);
-            if (nodeToBeRemoved == null) return;
+            var list = FindBucketList(key);
+            var nodeToBeRemoved = FindEntry(list, key);
+            if (nodeToBeRemoved == null) return false;
 
             list.Remove(nodeToBeRemoved);
             this._count--;
+            return true;
         }
 
         // IEnumerable 구현 ===============================================
-        public IEnumerator<T> GetEnumerator()=> new MyDictionaryEnumerator(this);
-        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()=> new MyDictionaryEnumerator(this);
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => this.GetEnumerator();
 
-        private class MyDictionaryEnumerator : IEnumerator<T>
+        private class MyDictionaryEnumerator : IEnumerator<KeyValuePair<TKey, TValue>>
         {
             private int _index;
-            private MyDictionary<T> _hset;
-            private IEnumerator<T> _iterator;
+            private MyDictionary<TKey, TValue> _dict;
+            private IEnumerator<KeyValuePair<TKey, TValue>> _iterator;
 
-            public MyDictionaryEnumerator(MyDictionary<T> hset)
+            public MyDictionaryEnumerator(MyDictionary<TKey, TValue> dict)
             {
                 this._index = 0;
-                this._hset = hset;
+                this._dict = dict;
                 this._iterator = FindNextEnumerator();
             }
 
-            public T Current => _iterator.Current;
+            public KeyValuePair<TKey, TValue> Current => _iterator.Current;
             object IEnumerator.Current => this.Current;
 
             public void Dispose() { }
@@ -157,10 +152,10 @@ namespace DataStructure
                 _iterator = FindNextEnumerator();
             }
 
-            private IEnumerator<T> FindNextEnumerator()
+            private IEnumerator<KeyValuePair<TKey, TValue>> FindNextEnumerator()
             {
-                while (_index < _hset._bucket.Length) {
-                    var list = _hset._bucket[_index++];
+                while (_index < _dict._bucket.Length) {
+                    var list = _dict._bucket[_index++];
                     if (list == null) continue;
                     if (list.Count > 0)
                         return list.GetEnumerator();
