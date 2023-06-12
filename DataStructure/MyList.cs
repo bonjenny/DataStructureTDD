@@ -191,7 +191,7 @@ namespace DataStructure
         }
         #endregion
 
-        #region [IndexOf, LastIndexOf]
+        #region [IndexOf, LastIndexOf, Find]
         public int IndexOf(T item)
         {
             return IndexOf(item, 0, _size);
@@ -236,6 +236,11 @@ namespace DataStructure
                 if (_comparer.Equals(_array[i], item)) return i;
             }
             return -1;
+        }
+
+        public T Find(T item)
+        {
+            return _array[IndexOf(item)];
         }
         #endregion
 

@@ -35,13 +35,21 @@ namespace Tests
                 Console.WriteLine(result);
             }
 
-            foreach (var item in x) {
+            foreach (var key in x.Keys) { // 키만 출력
+                Console.WriteLine(key);
+            }
+
+            foreach (var value in x.Values) { // 값만 출력
+                Console.WriteLine(value);
+            }
+
+            foreach (var item in x) { // 키와 값 쌍을 출력
                 Console.WriteLine(string.Format("{0} = {1}", item.Key, item.Value));
             }
 
             var xEnumerator = x.GetEnumerator();
             while (xEnumerator.MoveNext()) {
-                Console.WriteLine(string.Format("{0} = {1}", 
+                Console.WriteLine(string.Format("{0} = {1}",
                     xEnumerator.Current.Key, xEnumerator.Current.Value));
             }
         }
